@@ -1,3 +1,5 @@
+This is my async week project, standard weather app build with react styled components, react hook, async. and public API.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
