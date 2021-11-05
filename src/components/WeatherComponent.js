@@ -1,14 +1,30 @@
+import React from 'react';
 import styled from 'styled-components';
 
 
 export const WeatherInfoIcons = {
-  sunset: "/icons/temp.svg",
-  sunrise: "/icons/temp.svg",
   humidity: "/icons/humidity.svg",
   wind: "/icons/wind.svg",
-  pressure: "/icons/pressure.svg",
 };
 
+export const WeatherIcons = {
+  '01d': '/icons/sunny.svg',
+  '01n': '/icons/night.svg',
+  '02d': '/icons/day.svg',
+  '02n': '/icons/cloudy-night.svg',
+  '03d': '/icons/cloudy.svg',
+  '03n': '/icons/cloudy.svg',
+  '04d': '/icons/perfect-day.svg',
+  '04n': '/icons/cloudy-night.svg',
+  '09d': '/icons/rain.svg',
+  '09n': '/icons/rain-night.svg',
+  '10d': '/icons/rain.svg',
+  '10n': '/icons/rain-night.svg',
+  '11d': '/icons/rain-night.svg',
+  '11n': '/icons/rain-night.svg',
+  '50d': './icons/mist-day.svg',
+  '50n': './icons/mist-night.svg'
+}
 const WeatherCondition = styled.div`
   display: flex;
   flex-direction: row;
@@ -37,14 +53,6 @@ const Location = styled.span`
   font-weight: bold;
 `;
 
-const WeatherInfoLabel = styled.span`
-  font-size: 14px;
-  font-weight: bold;
-  margin: 20px 25px 10px;
-  text-align: start;
-  width: 90%;
-`;
-
 const InfoContainer = styled.div`
   display: flex;
   margin: 5px 10px;
@@ -55,7 +63,7 @@ const InfoContainer = styled.div`
 
 const WeatherInfoContainer = styled.div`
   display: flex;
-  width: 90%;
+  width: 100%;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
@@ -91,23 +99,21 @@ const WeatherInfoComponent = (props) => {
 }
 
 
-
-const WeatherComponent = () => {
+const WeatherComponent = (props) => {
+  const { weather } = props;
   return (
     <>
+      <Location>{`${weather?.name}, ${weather?.sys?.country}`}</Location>
       <WeatherCondition>
         <Condition>
-          <span>30 C</span> | Cloudy
+          <span>{`${weather?.main?.temp}°F`}</span>
+          {`  |  ${weather?.weather[0].description}`}
         </Condition>
-        <WeatherLogo src="/icons/perfect-day.svg" />
+        <WeatherLogo src={WeatherIcons[weather?.weather[0].icon]} />
       </WeatherCondition>
-      <Location>London, GB</Location>
-      <WeatherInfoLabel>Weather Info</WeatherInfoLabel>
       <WeatherInfoContainer>
-          <WeatherInfoComponent name="sunrise" value="2332"/>
-          <WeatherInfoComponent name="humidity" value="432"/>
-          <WeatherInfoComponent name="wind" value="423"/>
-          <WeatherInfoComponent name="pressure" value="1234"/>
+          <WeatherInfoComponent name="humidity" value={`${weather?.main?.humidity}%`} />
+          <WeatherInfoComponent name="wind" value={`${weather?.wind?.speed}mph`} />
       </WeatherInfoContainer>
     </>
   );

@@ -1,10 +1,11 @@
-import styled from "styled-components";
 import React from 'react';
+import styled from "styled-components";
+
 
 const WeatherLogo = styled.img`
-  width: 140px;
-  height: 140px;
-  margin: 40px auto;
+  width: 100px;
+  height: 100px;
+  margin: 10px auto;
 `;
 
 const ChooseCityLabel = styled.span`
@@ -42,14 +43,15 @@ const SearchBox = styled.form`
   }
 `;
 
-const CityComponent = () => {
+const CityComponent = (props) => {
+  const { updateCity, fetchWeather } = props;
   return (
     <>
-    <WeatherLogo src="/icons/perfect-day.svg"/>
+    <WeatherLogo src="/icons/weather.svg"/>
     <ChooseCityLabel>Check the weather in your city</ChooseCityLabel>
-    <SearchBox>
-    <input placeholder="City" />
-    <button>Search</button>
+    <SearchBox onSubmit={fetchWeather}>
+    <input placeholder="City" onChange={(e) => updateCity(e.target.value)} />
+    <button type="submit">Search</button>
     </SearchBox>
     </>
   );
