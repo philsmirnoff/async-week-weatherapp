@@ -1,4 +1,4 @@
-This is my async week project, standard weather app build with react styled components, react hook, async. and public API.
+This is my Async week project, Weather App, build using React styled components, async to fetch the data from Open Weather map API and react Hooks to update the state of the components.
 
 # Getting Started with Create React App
 
